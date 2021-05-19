@@ -1,18 +1,22 @@
 package by.mybot.controller.user;
 
+import by.mybot.authentication.bean.Role;
+import by.mybot.authentication.bean.User;
+import by.mybot.authentication.bean.UserRoles;
+import by.mybot.authentication.service.UserService;
+import by.mybot.consts.BCrypts;
 import by.mybot.consts.Pages;
 import by.mybot.consts.Paths;
-import by.mybot.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Map;
 
 @Controller
 public class IndexController {
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = Pages.INDEX)
     public ModelAndView getIndexPage(){
@@ -27,12 +31,12 @@ public class IndexController {
     }
 
     @PostMapping(value = Pages.SIGN_IN)
-    public ModelAndView postSignInPage(@RequestParam(value = "exampleInputEmail1") String username, @RequestParam(value = "exampleInputPassword1") String password){
-        ModelAndView modelAndView = new ModelAndView(Paths.SIGN_IN_PAGE);
-
-        User newUser =  User.builder().login(username).password(password.toCharArray()).build();
-        System.out.println(newUser);
-        return modelAndView;
+    public ModelAndView postSignInPage(@ModelAttribute(value = "inputEmail") String email,
+                                       @ModelAttribute(value = "inputPassword") String password){
+        ModelAndView modelAndView = new ModelAndView(Pages.SIGN_IN);
+        User newUser =  User.builder().email(email).password(BCrypts.cryptPassword(password)).build();
+        userService.saveUser(newUser, java.util.Optional.of(UserRoles.ROLE_GUEST));
+        return new ModelAndView(Pages.REDIRECT + Pages.INDEX);
     }
 
     @GetMapping(value = Pages.SIGN_IN)
