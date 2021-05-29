@@ -7,4 +7,6 @@ public class Pages {
     public static final String ADMIN = "/admin";
     public static final String SIGN_IN = "/signIn";
     public static final String SIGN_UP = "/signUp";
+
+    public static final String PAYMENT_HOME = "/payment";
 }
