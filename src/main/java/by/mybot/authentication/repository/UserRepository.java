@@ -6,20 +6,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
+@Transactional
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Transactional
     User findUserByEmail(String email);
-
-    @Transactional
     List<User> findUserByActiveFalse();
-
-    @Transactional
     List<User> findUserByActiveTrue();
-
-    @Transactional
     User findUserByUserName(String userName);
-
-    @Transactional
     void deleteById(Long id);
 }

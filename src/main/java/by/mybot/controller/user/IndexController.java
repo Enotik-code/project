@@ -22,6 +22,7 @@ public class IndexController {
     public ModelAndView getIndexPage(){
        ModelAndView modelAndView = new ModelAndView(Paths.INDEX_PAGE);
        modelAndView.addObject("text", "Send message" );
+
        return modelAndView;
     }
 

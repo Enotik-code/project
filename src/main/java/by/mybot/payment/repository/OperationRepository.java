@@ -9,12 +9,8 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional
 @Repository
-public interface OperationRepository{
+public interface OperationRepository extends JpaRepository<Operation, Long>{
 
-    @Transactional
-    @Query(value = SqlQuery.GET_ALL_OPERATIONS)
-    List<Operation> findAllOperation();
-
-    Operation getOperationById(Long operationId);
 }
