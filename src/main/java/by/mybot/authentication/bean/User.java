@@ -8,20 +8,19 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Data
 @Entity
 @Builder
-@Table(name = "user")
+@Table(name = "user_account")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "user_name")
     private String userName;
@@ -29,7 +28,7 @@ public class User implements Serializable {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "password")
+    @Column(name = "password", length = 60)
     private String password;
     @Column(name = "email")
     private String email;
@@ -58,14 +57,8 @@ public class User implements Serializable {
     @Column(name = "number_of_points")
     private BigDecimal numberOfPoints;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
-
-    public String getAllRoles() {
-        return roles.stream()
-                .map(role -> role.getRoleName().name())
-                .collect(Collectors.joining(", ", "{", "}"));
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 }
 

@@ -3,27 +3,36 @@ package by.mybot.authentication.bean;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Data
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 @Entity
-@Table(name = "roles")
 public class Role implements Serializable {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "role_name", unique = true)
-    @Enumerated(value = EnumType.STRING)
-    private UserRoles roleName;
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
 
+    @ManyToMany
+    @JoinTable(name = "roles_privileges", joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
+    private Collection<Privilege> privileges;
+
+    private String name;
+
+    public Role() {
+        super();
+    }
+
+    public Role(final String name) {
+        super();
+        this.name = name;
+    }
 
 }
