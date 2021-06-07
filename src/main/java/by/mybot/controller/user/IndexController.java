@@ -31,17 +31,17 @@ public class IndexController {
         return new ModelAndView(Paths.PRICE_PAGE);
     }
 
-    @PostMapping(value = Pages.SIGN_IN)
-    public ModelAndView postSignInPage(@ModelAttribute(value = "inputEmail") String email,
+    @PostMapping(value = Pages.SIGN_UP)
+    public ModelAndView postSignUpPage(@ModelAttribute(value = "inputEmail") String email,
                                        @ModelAttribute(value = "inputPassword") String password){
-        ModelAndView modelAndView = new ModelAndView(Pages.SIGN_IN);
+        ModelAndView modelAndView = new ModelAndView(Paths.SIGN_UP_PAGE);
         User newUser =  User.builder().email(email).password(BCrypts.cryptPassword(password)).build();
         userService.saveUser(newUser, java.util.Optional.of(UserRoles.ROLE_GUEST));
         return new ModelAndView(Pages.REDIRECT + Pages.INDEX);
     }
 
-    @GetMapping(value = Pages.SIGN_IN)
-    public ModelAndView getSignInPage(){
-        return new ModelAndView(Paths.SIGN_IN_PAGE);
+    @GetMapping(value = Pages.SIGN_UP)
+    public ModelAndView getSignUpPage(){
+        return new ModelAndView(Paths.SIGN_UP_PAGE);
     }
 }
