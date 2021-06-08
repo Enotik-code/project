@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 
 @Data
@@ -15,7 +16,6 @@ import java.util.Date;
 @Builder
 @Table(name = "user_account")
 @AllArgsConstructor
-@NoArgsConstructor
 public class User implements Serializable {
     @Id
     @Column(unique = true, nullable = false)
@@ -39,12 +39,10 @@ public class User implements Serializable {
     private String patronymic;
     @Column(name = "activation_code")
     private String activationCode;
-    @Column(name = "is_blocked")
-    private boolean isBlocked;
+    @Column(name = "enabled")
+    private boolean enabled;
     @Column(name = "count_of_wrong_attempts")
     private int countOfWrongAttempts = 0;
-    @Column(name = "active")
-    private Boolean active;
     @Column(name = "date_of_birthday")
     private Date dateOfBirthday;
     @Column(name = "date_of_created")
@@ -55,7 +53,13 @@ public class User implements Serializable {
     private BigDecimal accountBalance;
     @Column(name = "number_of_points")
     private BigDecimal numberOfPoints;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
-    private String roles;
+    public User() {
+        super();
+        this.enabled=false;
+    }
 }
 
