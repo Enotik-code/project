@@ -1,46 +1,40 @@
 <html>
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
-  <title th:utext="#{label.badUser.title}">bad user</title>
+  <title th:text="#{label.badUser.title}">bad user</title>
 </head>
 <body>
-<div class="container">
-  <h1 class="alert alert-danger" th:utext="${message}">error</h1>
-  <br/>
-  <a class="btn btn-default" th:href="@{/registration.html}" th:utext="#{label.form.loginSignUp}">signup</a>
+<h1 th:text="${param.message[0]}">error</h1>
+<br>
+<a th:href="@{/user/registration}" th:text="#{label.form.loginSignUp}">
+  signup</a>
 
-  <div th:if="${expired}">
-    <br/>
-    <h1 th:utext="#{label.form.resendRegistrationToken}">resend</h1>
-    <button onclick="resendToken()">resend</button>
+<div th:if="${param.expired[0]}">
+  <h1 th:text="#{label.form.resendRegistrationToken}">resend</h1>
+  <button onclick="resendToken()"
+          th:text="#{label.form.resendRegistrationToken}">resend</button>
 
+  <script src="jquery.min.js"></script>
+  <script type="text/javascript">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script th:inline="javascript">
-      var serverContext = [[@{/}]];
+    var serverContext = [[@{/}]];
 
-        function resendToken(){
-          var token = [[${token}]];
-          $.get(serverContext + "user/resendRegistrationToken?token="+token, function(data){
-            window.location.href = serverContext +"login?message=" + data.message;
-          })
-                  .fail(function(data) {
-                    if(data.responseJSON.error.indexOf("MailError") > -1)
-                    {
-                      window.location.href = serverContext + "emailError.html";
-                    }
-                    else{
-                      window.location.href = serverContext + "login?message=" + data.responseJSON.message;
-                    }
-                  });
-        }
-
-        $(document).ajaxStart(function() {
-          $("title").html("LOADING ...");
-        });
-    </script>
-
-  </div>
+      function resendToken(){
+        $.get(serverContext + "user/resendRegistrationToken?token=" + token,
+                function(data){
+                  window.location.href =
+                          serverContext +"login.html?message=" + data.message;
+                })
+                .fail(function(data) {
+                  if(data.responseJSON.error.indexOf("MailError") > -1) {
+                    window.location.href = serverContext + "emailError.html";
+                  }
+                  else {
+                    window.location.href =
+                            serverContext + "login.html?message=" + data.responseJSON.message;
+                  }
+                });
+      }
+  </script>
 </div>
 </body>
 </html>

@@ -21,8 +21,8 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
     @Autowired
     private MessageSource messages;
 
-/*    @Autowired
-    private JavaMailSender mailSender;*/
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Override
     public void onApplicationEvent(OnRegistrationCompleteEvent event) {
@@ -40,11 +40,11 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
                 = event.getAppUrl() + "/registrationConfirm?token=" + token;
         String message = messages.getMessage("message.regSucc", null, event.getLocale());
 
-/*       SimpleMailMessage email = new SimpleMailMessage();
+       SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText(message + "\r\n" + "http://localhost:8081" + confirmationUrl);
-        mailSender.send(email);*/
+        mailSender.send(email);
         System.out.println(message + "\r\n" + "http://localhost:8081" + confirmationUrl);
     }
 }

@@ -1,11 +1,10 @@
-package by.mybot.controller.user;
+package by.mybot.web.controller.user;
 
 import by.mybot.authentication.bean.Privilege;
 import by.mybot.authentication.bean.Role;
 import by.mybot.authentication.bean.User;
 import by.mybot.authentication.bean.VerificationToken;
 import by.mybot.authentication.dto.UserDto;
-import by.mybot.authentication.service.UserService;
 import by.mybot.authentication.service.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -14,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -36,11 +36,31 @@ public class RegistrationController {
     @Autowired
     private MessageSource messages;
 
-    @GetMapping("/user/registration")
-    public String showRegistrationForm(WebRequest request, Model model) {
-        UserDto userDto = new UserDto();
-        model.addAttribute("user", userDto);
-        return "registration";
+    @GetMapping("/console")
+    public ModelAndView console(final HttpServletRequest request, final ModelMap model, @RequestParam("messageKey") final Optional<String> messageKey) {
+
+        Locale locale = request.getLocale();
+        messageKey.ifPresent( key -> {
+                    String message = messages.getMessage(key, null, locale);
+                    model.addAttribute("message", message);
+                }
+        );
+
+        return new ModelAndView("console", model);
+    }
+
+    @GetMapping("/badUser")
+    public ModelAndView badUser(final HttpServletRequest request, final ModelMap model, @RequestParam("messageKey" ) final Optional<String> messageKey, @RequestParam("expired" ) final Optional<String> expired, @RequestParam("token" ) final Optional<String> token) {
+
+        Locale locale = request.getLocale();
+        messageKey.ifPresent( key -> {
+                    String message = messages.getMessage(key, null, locale);
+                    model.addAttribute("message", message);
+                }
+        );
+        expired.ifPresent( e -> model.addAttribute("expired", e));
+        token.ifPresent( t -> model.addAttribute("token", t));
+        return new ModelAndView("badUser", model);
     }
 
     @GetMapping("/registrationConfirm")
@@ -60,36 +80,6 @@ public class RegistrationController {
         model.addAttribute("token", token);
         return new ModelAndView("redirect:/badUser", model);
     }
-
-    @GetMapping("/login")
-    public ModelAndView login(final HttpServletRequest request, final ModelMap model, @RequestParam("messageKey" ) final Optional<String> messageKey, @RequestParam("error" ) final Optional<String> error) {
-        Locale locale = request.getLocale();
-        model.addAttribute("lang", locale.getLanguage());
-        messageKey.ifPresent( key -> {
-                    String message = messages.getMessage(key, null, locale);
-                    model.addAttribute("message", message);
-                }
-        );
-        error.ifPresent( e ->  model.addAttribute("error", e));
-        return new ModelAndView("login", model);
-    }
-
-    @GetMapping("/badUser")
-    public ModelAndView badUser(final HttpServletRequest request, final ModelMap model, @RequestParam("messageKey" ) final Optional<String> messageKey, @RequestParam("expired" ) final Optional<String> expired, @RequestParam("token" ) final Optional<String> token) {
-
-        Locale locale = request.getLocale();
-        messageKey.ifPresent( key -> {
-                    String message = messages.getMessage(key, null, locale);
-                    model.addAttribute("message", message);
-                }
-        );
-
-        expired.ifPresent( e -> model.addAttribute("expired", e));
-        token.ifPresent( t -> model.addAttribute("token", t));
-
-        return new ModelAndView("badUser", model);
-    }
-
     public void authWithoutPassword(User user) {
 
         List<Privilege> privileges = user.getRoles()
@@ -106,5 +96,6 @@ public class RegistrationController {
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
 
 }

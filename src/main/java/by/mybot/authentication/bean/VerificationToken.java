@@ -5,9 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Data
@@ -28,13 +27,6 @@ public class VerificationToken {
 
     private Date expiryDate;
 
-    private Date calculateExpiryDate(int expiryTimeInMinutes) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Timestamp(cal.getTime().getTime()));
-        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
-        return new Date(cal.getTime().getTime());
-    }
-
     public VerificationToken(final String token) {
         super();
 
@@ -50,5 +42,16 @@ public class VerificationToken {
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
 
+    private Date calculateExpiryDate(final int expiryTimeInMinutes) {
+        final Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(new Date().getTime());
+        cal.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(cal.getTime().getTime());
+    }
+
+    public void updateToken(final String token) {
+        this.token = token;
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
+    }
 
 }
