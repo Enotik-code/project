@@ -29,12 +29,12 @@ public class UserDto {
     @ValidPassword
     private String password;
 
-    @javax.validation.constraints.NotNull
+    @NotNull
     @Size(min = 1)
     private String matchingPassword;
 
     @ValidEmail
-    @javax.validation.constraints.NotNull
+    @NotNull
     @Size(min = 1, message = "{Size.userDto.email}")
     private String email;
 }
