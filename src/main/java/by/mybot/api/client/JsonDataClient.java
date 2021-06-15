@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@FeignClient(name = "JSON-GEO-SERVICE", url = "http://api.travelpayouts.com/data/ru/")
+@FeignClient(name = "JSON-DATA-CLIENT", url = "http://api.travelpayouts.com/data/ru/")
 public interface JsonDataClient {
 
     @RequestMapping(value = "countries.json", method = RequestMethod.GET)

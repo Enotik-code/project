@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.File;
 
-@FeignClient(name = "LOGO-SERVICE", url = "http://pics.avs.io/200/200/UN.png.")
+@FeignClient(name = "LOGO-DATA-CLIENT", url = "http://pics.avs.io")
 public interface LogoDataClient {
 
-    @RequestMapping(value = "/{width}/{height}/{iata}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{width}/{height}/{iata}.png", method = RequestMethod.GET)
     File getLogoFileByIataCode(@PathVariable String width, @PathVariable String height, @PathVariable String iata);
 }
