@@ -5,7 +5,7 @@ import by.mybot.api.bean.additional.NameTranslations;
 import lombok.Data;
 
 @Data
-public class Airports {
+public class Airport {
     private String code;
     private String name;
     private String iata_type;

@@ -20,7 +20,7 @@ public interface JsonDataClient {
     List<Airlines> getAllAirlines();
 
     @RequestMapping(value = "airports.json", method = RequestMethod.GET)
-    List<Airports> getAllAirports();
+    List<Airport> getAllAirports();
 
     @RequestMapping(value = "cities.json", method = RequestMethod.GET)
     List<City> getAllCities();
