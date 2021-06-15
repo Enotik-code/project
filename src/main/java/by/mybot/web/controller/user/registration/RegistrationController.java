@@ -1,4 +1,4 @@
-package by.mybot.web.controller.user;
+package by.mybot.web.controller.user.registration;
 
 import by.mybot.authentication.bean.Privilege;
 import by.mybot.authentication.bean.Role;
