@@ -2,7 +2,7 @@
 <html ng-app="myApp">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/mystyles.css" />
+    <link rel="stylesheet" href="/app/css/mystyles.css" />
 </head>
 <body>
 <div ng-controller="phoneController">
@@ -14,10 +14,10 @@
     </div>
     <div ng-include="setFile()"></div>
 </div>
-<script src="js/lib/angular.min.js"></script>
+<script src="../app/js/lib/angular.min.js"></script>
 <script type="text/javascript">
     var myApp = angular.module('myApp', []);
 </script>
-<script src="js/controllers/phonesController.js"></script>
+<script src="../app/js/controllers/phonesController.js"></script>
 </body>
 </html>
