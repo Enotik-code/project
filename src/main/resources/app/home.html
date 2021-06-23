@@ -1,19 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html ng-app="myApp">
 <head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/mystyles.css" />
 </head>
 <body>
-<form method="post" name="searchFlight">
-  <label>Город - </label>
-  <select name="city">
-    <option th:each="city : ${cityList}"
-            th:text="${city.name}">
-    </option>
-  </select>
-  <input type="text" placeholder="Название" name="name">
-  <button status="submit" >Добавить</button>
-</form>
+<div ng-controller="phoneController">
+    <div ng-repeat="button in modes">
+        <label>
+            <input type="radio" ng-model="data.mode" value="{{button.value}}" name="modes" />
+            {{button.label}}
+        </label>
+    </div>
+    <div ng-include="setFile()"></div>
+</div>
+<script src="js/lib/angular.min.js"></script>
+<script type="text/javascript">
+    var myApp = angular.module('myApp', []);
+</script>
+<script src="js/controllers/phonesController.js"></script>
 </body>
 </html>
