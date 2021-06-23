@@ -16,8 +16,9 @@ public class HomeController {
     private LocationService locationService;
 
     @GetMapping(value = "/air")
-    public ResponseEntity getHomePage(HttpServletRequest httpServletRequest){
-        return ResponseEntity.ok(locationService.getLocationFromIp(httpServletRequest).toString());
+    public ModelAndView getHomePage(){
+        ModelAndView modelAndView = new ModelAndView("/home");
+        return modelAndView;
     }
 
     /*@RequestMapping(value = "/processing", method = RequestMethod.GET)

@@ -1,3 +1,4 @@
+/*
 package by.mybot.spring;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,6 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authProvider());
     }
-
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -41,3 +41,4 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(11);
     }
 }
+*/
