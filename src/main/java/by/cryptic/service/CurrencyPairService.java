@@ -29,10 +29,10 @@ public class CurrencyPairService {
         currencyPairRepository.updateCurrencyPair(currency, targetCurrency, id);
     }
 
-    public void insertCurrencyPair(String name,  Currency currency, Currency targetCurrency) {
+   /* public void insertCurrencyPair(String name,  Currency currency, Currency targetCurrency) {
         log.info("Inserting currency pair: {}", currency);
         currencyPairRepository.insertCurrencyPair(name, currency, targetCurrency);
-    }
+    }*/
 
     public void delete(CurrencyPair currencyPair) {
         log.info("Deleting currency pair: {}", currencyPair);
