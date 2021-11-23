@@ -1,0 +1,66 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/cryptostore?autoReconnect=true
+    username: postgres
+    password: 1234
+    hikari:
+      maximumPoolSize: 10
+    jpa:
+      database: POSTGRESQL
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      generate-ddl: false
+      show-sql: false
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          format_sql: default
+          temp:
+            use_jdbc_metadata_defaults: false
+        javax:
+          persistence:
+            sharedCache:
+              mode: NONE
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  mail:
+    host: smtp.gmail.com
+    port: '587'
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+        smtp:
+          starttls:
+            enable: 'true'
+        smtps:
+          auth: 'true'
+          timeout: '8000'
+          starttls:
+            enable: 'true'
+    password: 1239087154aA
+  profiles:
+    active: dev
+  thymeleaf:
+    enabled: 'false'
+
+security:
+  basic:
+    enabled: 'false'
+
+server:
+  port: '8081'
+
+support:
+  email: kupreichik.anton@gmail.com
+
+logging:
+  level:
+    org:
+      thymeleaf: TRACE
