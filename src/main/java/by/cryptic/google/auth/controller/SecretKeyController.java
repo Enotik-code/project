@@ -3,7 +3,6 @@ package by.cryptic.google.auth.controller;
 import by.cryptic.google.auth.domain.VerificationResultDto;
 import by.cryptic.google.auth.twoFA.TwoFAUtils;
 import by.cryptic.google.auth.domain.SecretKeyDto;
-import by.cryptic.google.auth.utills.GoogleAuthUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
