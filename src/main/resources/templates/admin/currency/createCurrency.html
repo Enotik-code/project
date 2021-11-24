@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Books</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1> Add Books </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <a class="btn btn-info" href="#" th:href="@{admin/currency/list}"> Назад к Валютам </a>
+      <form action="#" class="form-horizontal"
+            th:action="@{/currency/save}"
+            th:object="${form}"
+            method="post">
+        <fieldset>
+					<span class="pull-right">
+						    <input type="submit" id="submitButton" class="btn btn-success" th:value="Save">
+						    <input type="reset" id="resetButton" class="btn btn-danger" th:value="Reset"/>
+					</span>
+          <table class="table">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Имя</th>
+              <th>Код</th>
+              <th>Описание</th>
+              <th>Приоритет</th>
+              <th>Кол-тво знаков после запятой</th>
+              <th>Фиатная</th>
+              <th>Адрес контракта</th>
+              <th>Актуальная</th>
+              <th>Базовая валюта</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cur, itemStat : *{listCurrency}">
+              <td><input th:placeholder="Id + ' ' + ${itemStat.count}" th:field="*{cur[__${itemStat.index}__].id}" required/></td>
+              <td><input th:placeholder="Name + ' ' + ${itemStat.count}" th:field="*{cur[__${itemStat.index}__].name}" required/></td>
+            </tr>
+            </tbody>
+          </table>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

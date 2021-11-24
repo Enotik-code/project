@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <title>Компании</title>
+    <title>Валюты</title>
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row">
-        <form style="margin-top: 20px"  th:action="@{searchName}" method="get">
-            <input type="text" name="name"  placeholder="Название компании"/>&nbsp;&nbsp;&nbsp;
-            <button  class="btn btn-success"  type="submit">Найти по названию</button>
-        </form>
-        <form style="margin:  20px" th:action="@{searchId}" method="get">
-            <input type="text" name="id" placeholder="#"/>&nbsp;&nbsp;&nbsp;
-            <button type="submit"  class="btn btn-success">Найти по #</button>
-        </form>
-
-    </div>
-</div>
-<br>
-<form method="get">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>Имя</th>
-            <th>Город</th>
-            <th>Статус</th>
-            <th>Груз</th>
-            <th>Удалить</th>
-            <th>Изменить</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="cur : ${listCurrency}">
-            <td th:text="${cur.getId()}">#</td>
-            <td th:text="${cur.getName()}">Имя</td>
-            <!--<td th:text="${company.city.getName()}">Город</td>
-            <td th:text="${company.status.getName()}">Статус</td>
-            <td th:text="${company.cargo.getName()}">Груз</td>
-           --> <td><a th:object="${cur}" th:href="@{'/delete/' + ${cur.getId()}}">Удалить</a></td>
-            <td><a th:object="${cur}" th:href="@{'/update/' + ${cur.getId()}}">Изменить</a></td>
-        </tr>
-    </table>
+    <form style="margin-top: 20px" th:action="@{searchByName}" method="get">
+        <input type="text" name="name" placeholder="Биткоин..."/>
+        <button class="btn btn-success" type="submit">Найти по имени</button>
+    </form>
+    <form style="margin:  20px" th:action="@{searchByCode}" method="get">
+        <input type="text" name="code" placeholder="BYN..."/>
+        <button type="submit" class="btn btn-success">Найти по коду валюты</button>
+    </form>
     <br>
-</form>
-<br>
-<a href="/list">Назад</a>
-<br>
-<a href="/addCompany">Добавить компании</a>
+    <form method="get">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Имя</th>
+                <th>Код</th>
+                <th>Описание</th>
+                <th>Приоритет</th>
+                <th>Кол-тво знаков после запятой</th>
+                <th>Фиатная</th>
+                <th>Адрес контракта</th>
+                <th>Актуальная</th>
+                <th>Базовая валюта</th>
+                <th>Удалить валюту</th>
+                <th>Изменить валюту</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cur : ${listCurrency}">
+                <td th:text="${cur.getId()}">#</td>
+                <td th:text="${cur.getName()}">Имя</td>
+                <td th:text="${cur.getCode()}">Код</td>
+                <td th:text="${cur.getDescription()}">Описание</td>
+                <td th:text="${cur.getPriority()}">Приоритет</td>
+                <td th:text="${cur.getScale()}">Кол-тво знаков после запятой</td>
+                <td th:text="${cur.getIsFiat()}">Фиатная</td>
+                <td th:text="${cur.getContractAddress()}">Адрес контракт</td>
+                <td th:text="${cur.isActual()}">Актуальная</td>
+                <td th:text="${cur.getBaseId()}">Базовая валюта</td>
+                <td><a th:object="${cur}" th:href="@{'/delete/' + ${cur.getId()}}">Удалить</a></td>
+                <td><a th:object="${cur}" th:href="@{'/update/' + ${cur.getId()}}">Изменить</a></td>
+            </tr>
+        </table>
+        <br>
+    </form>
+    <br>
+    <a href="/list">Назад</a>
+    <br>
+    <a href="/addCompany">Добавить компании</a>
+</div>
 </body>
 </html>

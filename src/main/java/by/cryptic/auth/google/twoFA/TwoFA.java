@@ -9,7 +9,7 @@ import java.util.Scanner;
 @Component
 public class TwoFA {
 
-    public static void main(String[] args) throws IOException, WriterException {
+    /*public static void main(String[] args) throws IOException, WriterException {
         String secretKey = "KMMC7VFMM3YNN5KX6GL4W5TPHQ47RN3T";
         String email = "fvantop@gmail.com";
         String companyName = "BitCash";
@@ -24,6 +24,6 @@ public class TwoFA {
         } else {
             System.out.println("Invalid 2FA Code");
         }
-    }
+    }*/
 
 }

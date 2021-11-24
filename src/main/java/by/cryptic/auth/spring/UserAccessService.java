@@ -1,3 +1,4 @@
+/*
 package by.cryptic.auth.spring;
 
 import by.cryptic.entities.UserRole;
@@ -22,7 +23,8 @@ public class UserAccessService {
         return isUserAuthenticated;
     }
 
-    /*public boolean isCurrentUserIsAdmin() {
+    */
+/*public boolean isCurrentUserIsAdmin() {
         boolean isCurrentUserIsAdmin = false;
         if(isCurrentUserAuthenticated()) {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -30,7 +32,8 @@ public class UserAccessService {
             isCurrentUserIsAdmin = authorities.stream().anyMatch(ga -> ga.getAuthority().equals());
         }
         return isCurrentUserIsAdmin;
-    }*/
+    }*//*
+
 
     public static  boolean hasRole (UserRole role){
         return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
@@ -38,4 +41,4 @@ public class UserAccessService {
     }
 
 
-}
+}*/

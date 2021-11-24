@@ -1,4 +1,4 @@
-package by.cryptic.swagger.config;
+package by.cryptic.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
