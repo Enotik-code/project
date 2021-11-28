@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+
+
+    <meta charset="UTF-8">
+    <title>Мои криптокошельки</title>
+</head>
+<body>
+
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Мои криптокошельки</h1>
+        </div>
+    </div>
+    <form method="get">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Адрес</th>
+                <th>Баланс</th>
+                <th>Описание</th>
+                <th>Валюта</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="wallet : ${listWallet}">
+                <td th:text="${wallet.getAddress()}">Адрес</td>
+                <td th:text="${wallet.getBalance().doubleValue()}">Баланс</td>
+                <td th:text="${wallet.getDescription()}">Описание</td>
+                <td th:text="${wallet.getCurrency().getName()}">Валюта</td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <br><br>
+    <a href="wallet/to/card/withdraw">Снятие средств с кошелька на карту</a>
+    <br>
+    <a href="wallet/to/card/replenish">Пополнеие средств c карты</a>
+    <br>
+    <a href="/wallet/remove">Удаление кошелька</a>
+    <br>
+    <a href="/wallet/add">Создать новый кошелек</a>
+    <br><br>
+    <a href="/wallet/crypto/my"> Мои криптовалюты</a>
+    <br>
+    <a href="/card/my"> Мои карты</a>
+    <br>
+    <br>
+    <a href="/">На главную</a>
+    <br> <br>
+    <div class="row">
+        <div class="col">
+            <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+            <div class="coinmarketcap-currency-widget" data-currencyid="1" data-base="USD" data-secondary="USD"
+                 data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-statsticker="true"
+                 data-stats="USD"></div>
+
+        </div>
+        <div class="col-6">
+            <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/currency.js"></script>
+            <div class="coinmarketcap-currency-widget" data-currencyid="1027" data-base="USD" data-secondary="USD"
+                 data-ticker="true" data-rank="true" data-marketcap="true" data-volume="true" data-statsticker="true"
+                 data-stats="USD"></div>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

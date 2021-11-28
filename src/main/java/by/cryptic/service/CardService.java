@@ -1,6 +1,5 @@
 package by.cryptic.service;
 
-import by.cryptic.auth.service.UserService;
 import by.cryptic.entities.Card;
 import by.cryptic.entities.User;
 import by.cryptic.repository.CardRepository;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.function.BiFunction;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -18,9 +17,6 @@ public class CardService {
 
     @Autowired
     private CardRepository cardRepository;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private CurrencyService currencyService;
@@ -40,14 +36,18 @@ public class CardService {
         return cardRepository.save(card);
     }
 
-    public Card replenishCard(Card card, BigDecimal amount) {
+    public Card replenishCard(String cardNumber, BigDecimal amount) {
+        Card card = cardRepository.findByCardNumber(cardNumber);
+
         card.setBalance(card.getBalance().add(amount));
         card.setUpdateDate(new Date());
         log.info("Card {} was replenished", card);
         return cardRepository.save(card);
     }
 
-    public Card withdrawMoney(Card card, BigDecimal amount) {
+    public Card withdrawMoney(String cardNumber, BigDecimal amount) {
+        Card card = cardRepository.findByCardNumber(cardNumber);
+
         card.setBalance(card.getBalance().subtract(amount));
         card.setUpdateDate(new Date());
         log.info("Card {} was withdrawed", card);
@@ -55,8 +55,23 @@ public class CardService {
     }
 
     public Card getCardByNumber(String cardNumber) {
+        log.info("Find card by number {}", cardNumber);
         return cardRepository.findByCardNumber(cardNumber);
     }
 
+    public String deleteCard(String cardNumber) {
+        cardRepository.deleteById(cardNumber);
+        log.info("Card {} was deleted", cardNumber);
+        return cardNumber;
+    }
 
+    public List<Card> findAll() {
+        log.info("Find all cards");
+        return cardRepository.findAll();
+    }
+
+    public List<Card> findCardByUserId(Long id){
+        log.info("Find cards by user id {}", id);
+        return cardRepository.findAllByUserId(id);
+    }
 }

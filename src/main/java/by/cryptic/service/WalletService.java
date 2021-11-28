@@ -25,7 +25,7 @@ public class WalletService {
         log.info("Wallet created");
     }
 
-    public List<Wallet> getWallet(String sign) {
+    public List<Wallet> getWallets(String sign) {
         return walletRepository.findAllBySign(sign);
     }
 

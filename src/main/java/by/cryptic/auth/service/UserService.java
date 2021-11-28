@@ -32,6 +32,10 @@ public class UserService {
         return userRepository.findByLogin(login);
     }
 
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
     public User saveUser(User user) {
         Role currentRole = Role.ROLE_USER;
 

@@ -19,35 +19,35 @@
             crossorigin="anonymous"></script>
 
 
-
 </head>
 <body>
 
-
 <div class="container">
-    <div class="col-md-5">
-        <label for="country" class="form-label">Ваши карточки</label>
-        <select class="form-select" id="country" name="country" required>
-            <option th:each="card : ${listCard}"
-                    th:text="${card.cardNumber}">
-            </option>
-        </select>
-        <div class="invalid-feedback">
-            Введите карточку для оплаты.
+    <form method="post" name="card/replenish">
+        <div class="col-md-5">
+            <label for="card" class="form-label">Ваши карточки</label>
+            <select class="form-select" id="card" name="card" required>
+                <option th:each="card : ${cardList}"
+                        th:text="${card.cardNumber}">
+                </option>
+            </select>
+            <div class="invalid-feedback">
+                Введите карточку для снятия.
+            </div>
         </div>
-    </div>
 
 
-    <div class="col-md-3">
-        <label for="sum" class="form-label">Сумма</label>
-        <input type="text" class="form-control" id="sum" placeholder="" required>
-        <div class="invalid-feedback">
-            Введите сумму
+        <div class="col-md-3">
+            <label for="amount" class="form-label">Сумма</label>
+            <input type="text" class="form-control" id="amount" placeholder="" required>
+            <div class="invalid-feedback">
+                Введите сумму
+            </div>
         </div>
-    </div>
-    <br>
-    <br>
-    <button class="w-100 btn btn-primary btn-lg" type="submit">Все верно!</button>
+        <br>
+        <br>
+        <button class="w-100 btn btn-primary btn-lg" type="submit">Все верно!</button>
+    </form>
 
     <br><br>
     <a href="/card/withdraw">Снятие средств</a>

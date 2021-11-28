@@ -20,17 +20,37 @@
 
 <div class="container">
 
-
+    <form method="post" name="createWallet">
     <label>Валюта - </label>
-    <select name="currency">
-        <option th:each="currency : ${currencyList}"
-                th:text="${currency.getName()}">
-        </option>
-    </select>
+        <label>
+            <select name="currency">
+                <option th:each="currency : ${listCurrency}"
+                        th:text="${currency.description}">
+                </option>
+            </select>
+        </label>
+        <br>
 
-    <input type="text" placeholder="Описание" name="name">
-    <button status="submit" >Добавить</button>
+        <label>
+            <input type="text" placeholder="Описание" name="description">
+        </label>
+        <br>
+        <button type="submit" >Добавить</button>
+    </form>
 
+    <br><br>
+    <a href="wallet/to/card/withdraw">Снятие средств с кошелька на карту</a>
+    <br>
+    <a href="wallet/to/card/replenish">Пополнеие средств c карты</a>
+    <br>
+    <a href="/wallet/remove">Удаление кошелька</a>
+    <br>
+    <a href="/wallet/add">Создать новый кошелек</a>
+    <br><br>
+    <a href="/wallet/crypto/my"> Мои криптовалюты</a>
+    <br>
+    <a href="/card/crypto/my"> Мои карты</a>
+    <br>
 </div>
 
 </body>
