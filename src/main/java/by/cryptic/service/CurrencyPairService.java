@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -14,14 +16,24 @@ public class CurrencyPairService {
 
     private final CurrencyPairRepository currencyPairRepository;
 
+    public List<CurrencyPair> getAll(){
+
+        return currencyPairRepository.findAll();
+    }
+
     public void save(CurrencyPair currencyPair) {
         log.info("Saving currency pair: {}", currencyPair);
         currencyPairRepository.save(currencyPair);
     }
 
-    public CurrencyPair getByName(String name) {
+    public CurrencyPair getCurrencyPairByName(String name) {
         log.info("Getting currency pair by name: {}", name);
-        return currencyPairRepository.findByName(name);
+        return currencyPairRepository.findByName(name).orElse(null);
+    }
+
+    public CurrencyPair getCurrencyPairById(Integer id){
+        log.info("Getting currency pair by id: {}", id);
+        return currencyPairRepository.findById(id).orElse(null);
     }
 
     public void update(Currency currency, Currency targetCurrency, Long id ) {

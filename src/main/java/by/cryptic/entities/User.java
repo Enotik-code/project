@@ -90,5 +90,8 @@ public class User implements Serializable {
 
     @Column(name = "SOURCE")
     private String source;
+
+    @Column(name = "PASSWORD")
+    private String password;
 }
 

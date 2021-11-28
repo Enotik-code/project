@@ -11,15 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Setter
 @Getter
+@Builder
 @ToString(of = {"address", "balance", "sealed", "description", "error"})
 @Table(name = "H_CRYPTO_WALLET")
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Wallet implements Serializable {
 
     private static final long serialVersionUID = 1L;

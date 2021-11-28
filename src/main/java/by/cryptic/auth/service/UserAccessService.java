@@ -1,7 +1,7 @@
-/*
-package by.cryptic.auth.spring;
+package by.cryptic.auth.service;
 
 import by.cryptic.entities.UserRole;
+import by.cryptic.models.enums.Role;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,22 +23,18 @@ public class UserAccessService {
         return isUserAuthenticated;
     }
 
-    */
-/*public boolean isCurrentUserIsAdmin() {
+    public boolean isCurrentUserIsAdmin() {
         boolean isCurrentUserIsAdmin = false;
-        if(isCurrentUserAuthenticated()) {
+        if (isCurrentUserAuthenticated()) {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-            isCurrentUserIsAdmin = authorities.stream().anyMatch(ga -> ga.getAuthority().equals());
+            isCurrentUserIsAdmin = authorities.stream().anyMatch(ga -> ga.getAuthority().equals(Role.ROLE_ADMIN.name()));
         }
         return isCurrentUserIsAdmin;
-    }*//*
-
-
-    public static  boolean hasRole (UserRole role){
-        return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
-                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(role.getRole()));
     }
 
-
-}*/
+    public static boolean hasRole(String role) {
+        return SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(role));
+    }
+}

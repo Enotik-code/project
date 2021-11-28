@@ -3,18 +3,22 @@ package by.cryptic.repository;
 import by.cryptic.entities.Currency;
 import by.cryptic.entities.CurrencyPair;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 public interface CurrencyPairRepository extends JpaRepository<CurrencyPair, Long> {
-    CurrencyPair findByName(String name);
+    Optional<CurrencyPair> findByName(String name);
+    Optional<CurrencyPair> findById(Integer id);
+
     List<CurrencyPair> findCurrencyPairByTargetCurrency(Currency targetCurrency);
+
 
     @Query("select cp from CurrencyPair cp where cp.currency = ?1 and cp.targetCurrency = ?2")
     CurrencyPair findBySourceAndTarget(Currency sourceCurrency, Currency targetCurrency);
+
 
     @Transactional
     @Query("UPDATE CurrencyPair cp SET cp.currency = ?1, cp.targetCurrency = ?2 WHERE cp.id = ?3")

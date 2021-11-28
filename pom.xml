@@ -80,6 +80,15 @@
             <artifactId>springfox-bean-validators</artifactId>
             <version>3.0.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.0.1-jre</version>
+        </dependency>
+
+
         <!--spring boot-->
 
         <dependency>
@@ -116,6 +125,7 @@
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

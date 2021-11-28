@@ -11,11 +11,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @ToString(of = {"cardNumber", "balance", "description", "error"})
 @Table(name = "H_CARD")
