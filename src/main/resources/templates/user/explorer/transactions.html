@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Лист транзакций</title>
+</head>
+<body>
+<h1>Лист транзакций</h1>
+<p th:text="${currency}">Валюта</p>
+<p th:text="${address}">Адресс</p>
+<br>
+<div class="container">
+    <div class="col-md-5">
+        <br>
+        <form method="get">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Уникальный идентификатор транзакции</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="transaction : ${transactions}">
+                    <td th:text="${transaction}">Транзакция</td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <br><br>
+    </div>
+
+
+<br>
+<a href="/">На главную</a>
+<br> <br>
+<div class="row">
+    <div class="col">
+        <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinPriceBlock.js"></script>
+        <div id="coinmarketcap-widget-coin-price-block" coins="1,1027,825,5426,2010,52" currency="USD" theme="light"
+             transparent="true" show-symbol-logo="true"></div>
+    </div>
+</div>
+
+
+</body>
+</html>

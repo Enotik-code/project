@@ -8,10 +8,10 @@ spring:
     jpa:
       database: POSTGRESQL
       database-platform: org.hibernate.dialect.PostgreSQLDialect
-      generate-ddl: false
-      show-sql: false
+      generate-ddl: true
+      show-sql: true
       hibernate:
-        ddl-auto: update
+        ddl-auto: none
       properties:
         hibernate:
           format_sql: default
@@ -54,6 +54,8 @@ security:
 
 server:
   port: '8081'
+  ethApi: https://api.etherscan.io/api?action=txlist&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=6EKZ7ZXDQSWB8NWCPIY6YJSGXSZNCWXP6X&module=account&address=
+  btcApi: https://blockstream.info/api/address/
 
 support:
   email: kupreichik.anton@gmail.com
