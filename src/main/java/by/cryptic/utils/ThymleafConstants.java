@@ -24,7 +24,6 @@ public class ThymleafConstants {
     //wallet
     public static final String WALLET_ADDRESS = "user/wallet/create";
 
-
     //country
     public static final String COUNTRY_LIST = "listCountry";
 }

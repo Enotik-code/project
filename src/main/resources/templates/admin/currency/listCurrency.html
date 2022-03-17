@@ -18,13 +18,16 @@
 </head>
 <body>
 <div class="container-fluid">
-    <form style="margin-top: 20px" th:action="@{searchByName}" method="get">
+    <form style="margin: 20px" th:action="@{searchByName}" method="get">
         <input type="text" name="name" placeholder="Биткоин..."/>
         <button class="btn btn-success" type="submit">Найти по имени</button>
     </form>
-    <form style="margin:  20px" th:action="@{searchByCode}" method="get">
+    <form style="margin: 20px" th:action="@{searchByCode}" method="get">
         <input type="text" name="code" placeholder="BYN..."/>
         <button type="submit" class="btn btn-success">Найти по коду валюты</button>
+    </form>
+    <form style="margin: 20px" th:action="@{list}" method="get">
+        <button type="submit" class="btn">Обновить страницу</button>
     </form>
     <br>
     <form method="get">
@@ -66,7 +69,6 @@
     <br>
     <a href="/list">Назад</a>
     <br>
-    <a href="/addCompany">Добавить компании</a>
 </div>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Логирование работы проекта</title>
+</head>
+<body>
+<h1>Логирование работы проекта</h1>
+<p>Выберите действие:</p>
+<ul>
+    <li><a href="/logs/all">Показать посление логи</a></li>
+    <li><a href="/logs/clear">Очистить файл с логами</a></li>
+    <li><a href="/logs/download">Скачать логи</a></li>
+    <br>
+    <li><a href="/admin/panel">Рабочая панель</a></li>
+</ul>
+<p><b>Текущий размер файла: </b></p>
+<p th:text="${currentSize}">Текущий размер файла</p>
+<p><b>Расположение файла: </b></p>
+<p th:text="${currentPath}">Расположение файла</p>
+<p><b>Имя файла: </b></p>
+<p th:text="${currentName}">Имя файла</p>
+
+</body>
+</html>

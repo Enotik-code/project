@@ -60,3 +60,7 @@ server:
 support:
   email: kupreichik.anton@gmail.com
 
+logging:
+  file:
+    name: log/cryptic.log
+    max-size: 300MB
