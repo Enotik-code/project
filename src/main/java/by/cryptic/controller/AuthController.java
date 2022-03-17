@@ -1,7 +1,6 @@
 package by.cryptic.controller;
 
 import by.cryptic.entities.Country;
-import by.cryptic.entities.Currency;
 import by.cryptic.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ public class AuthController {
     private CountryService countryService;
 
     @GetMapping("/user/create")
-    public ModelAndView createUser(){
+    public ModelAndView createUser() {
         ModelAndView modelAndView = new ModelAndView("/user/account/create");
         modelAndView.addObject(COUNTRY_LIST, countryService.getAllCountries()
                 .stream()

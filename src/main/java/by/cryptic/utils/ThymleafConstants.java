@@ -2,7 +2,7 @@ package by.cryptic.utils;
 
 public class ThymleafConstants {
 
-
+    private ThymleafConstants(){}
 
     //base
     public static final String LIST = "/list";

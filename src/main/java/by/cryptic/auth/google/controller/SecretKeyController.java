@@ -8,10 +8,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/secret", produces = "application/json")
@@ -20,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Secret Google keys")
 public class SecretKeyController {
 
-    @RequestMapping(value = "/getSecretKey", method = RequestMethod.GET)
+    @GetMapping(value = "/getSecretKey")
     @Operation(summary = "Получение рандомного секретного ключа для использования в Google Autheficator")
     public SecretKeyDto getGoogleSecretKey() {
         return SecretKeyDto.builder().secretKey(TwoFAUtils.generateSecretKey()).build();
     }
 
-    @RequestMapping(value = "/verifyFromGoogle", method = RequestMethod.POST)
+    @GetMapping(value = "/verifyFromGoogle")
     @Operation(summary = "Верификация с помощью двухфакторной аунтефикации с помощью GAuth")
     public VerificationResultDto verifyUserBySecretKey(
             @Parameter(required = true) @RequestParam(value = "secretKey", defaultValue = "secret_key") String secretKey,

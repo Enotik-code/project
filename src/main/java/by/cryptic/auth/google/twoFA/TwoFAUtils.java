@@ -6,6 +6,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import de.taimos.totp.TOTP;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.codec.binary.Hex;
 import org.springframework.stereotype.Component;
@@ -17,7 +18,14 @@ import java.net.URLEncoder;
 import java.security.SecureRandom;
 
 @Component
+@Slf4j
 public class TwoFAUtils {
+
+    private TwoFAUtils() {
+
+    }
+
+    public static final String UTF_8 = "UTF-8";
 
     public static String generateSecretKey() {
         SecureRandom random = new SecureRandom();
@@ -37,9 +45,9 @@ public class TwoFAUtils {
     public static String getGoogleAuthenticatorBarCode(String secretKey, String account, String issuer) {
         try {
             return "otpauth://totp/"
-                    + URLEncoder.encode(issuer + ":" + account, "UTF-8").replace("+", "%20")
-                    + "?secret=" + URLEncoder.encode(secretKey, "UTF-8").replace("+", "%20")
-                    + "&issuer=" + URLEncoder.encode(issuer, "UTF-8").replace("+", "%20");
+                    + URLEncoder.encode(issuer + ":" + account, UTF_8).replace("+", "%20")
+                    + "?secret=" + URLEncoder.encode(secretKey, UTF_8).replace("+", "%20")
+                    + "&issuer=" + URLEncoder.encode(issuer, UTF_8).replace("+", "%20");
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException(e);
         }
@@ -59,12 +67,14 @@ public class TwoFAUtils {
         while (true) {
             String code = getTOTPCode(secretKey);
             if (!code.equals(lastCode)) {
-                System.out.println(code);
+               log.info(code);
             }
             lastCode = code;
             try {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {};
+            } catch (InterruptedException e) {
+                log.error(e.getMessage());
+            };
         }
     }
 }

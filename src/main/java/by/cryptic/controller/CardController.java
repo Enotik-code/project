@@ -1,21 +1,18 @@
 package by.cryptic.controller;
 
-import by.cryptic.entities.User;
-import by.cryptic.repository.CardRepository;
 import by.cryptic.service.CardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.awt.*;
 import java.math.BigDecimal;
-import java.util.Date;
+
+import static by.cryptic.utils.HttpConstant.CARD_LIST;
 
 @Slf4j
 @Controller
@@ -29,7 +26,7 @@ public class CardController {
     public ModelAndView getCardsPage() {
         ModelAndView modelAndView = new ModelAndView("/user/card/list");
         Long userId = 63187L;
-        modelAndView.addObject("cardList", cardService.findCardByUserId(userId));
+        modelAndView.addObject(CARD_LIST, cardService.findCardByUserId(userId));
         return modelAndView;
     }
 
@@ -42,7 +39,7 @@ public class CardController {
     public ModelAndView getReplenishCardPage() {
         ModelAndView modelAndView = new ModelAndView("/user/card/replenish");
         Long userId = 63187L;
-        modelAndView.addObject("cardList", cardService.findCardByUserId(userId));
+        modelAndView.addObject(CARD_LIST, cardService.findCardByUserId(userId));
         return modelAndView;
     }
 
@@ -58,7 +55,7 @@ public class CardController {
     public ModelAndView getTransferCardPage() {
         ModelAndView modelAndView = new ModelAndView("/user/card/transfer");
         Long userId = 63187L;
-        modelAndView.addObject("cardList", cardService.findCardByUserId(userId));
+        modelAndView.addObject(CARD_LIST, cardService.findCardByUserId(userId));
         return modelAndView;
     }
 
@@ -66,13 +63,13 @@ public class CardController {
     public ModelAndView getWithdrawCardPage() {
         ModelAndView modelAndView = new ModelAndView("/user/card/withdraw");
         Long userId = 63187L;
-        modelAndView.addObject("cardList", cardService.findCardByUserId(userId));
+        modelAndView.addObject(CARD_LIST, cardService.findCardByUserId(userId));
         return modelAndView;
     }
 
     @PostMapping("/withdraw")
     public ModelAndView withdrawCard(@RequestParam(value = "card", required = false) String card,
-                                      @RequestParam(value = "amount", required = false) BigDecimal amount) {
+                                     @RequestParam(value = "amount", required = false) BigDecimal amount) {
         cardService.withdrawMoney(card, amount);
         log.info("Card withdrawn");
         return new ModelAndView("success");
